@@ -8,10 +8,6 @@ public class GamePiece {
 	private int y;
 	private boolean dead = false;
 	
-	public GamePiece() {
-		
-	}
-	
 	public GamePiece(int x, int y) {
 		this.x = x;
 		this.y = y;
