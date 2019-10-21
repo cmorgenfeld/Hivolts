@@ -10,12 +10,21 @@ public class Grid {
       if (j == 0 || j == 11) {
         field[i][j] = new Fence(i, j);
       }
-      else if (Math.random() >= 0.2 && fenceCount < 20) {
+      else if (Math.random() <= 0.2 && fenceCount < 20) {
         field[i][j] = new Fence(i, j);
         fenceCount++;
       }
     }
   }
-    
-  
+  int mohCount = 0;
+  while (mohCount < 12) {
+    for (int i = 1; i < 11; i++) {
+      for (int j = 1; j < 11; j++) {
+        if (field[i][j] == null && Math.random() <= 0.12) {
+          field[i][j] == Moh(i, j, mohCount);
+          mohCount++;
+        }
+      }
+    }
+  }
 }
