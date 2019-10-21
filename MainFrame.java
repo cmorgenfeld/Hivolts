@@ -1,5 +1,3 @@
-package game;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,67 +12,41 @@ import javax.swing.JLabel;
 public class MainFrame extends JFrame implements KeyListener{
     private MainDraw draw;
     private Rectangle fence;
+    private You you;
 
     public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed");
+    	int key = e.getKeyCode();
+    	if(key == KeyEvent.VK_Q) {
+    		you.move(-1, 1);
+    	} else if(key == KeyEvent.VK_W) {
+    		you.move(0, 1);
+    	} else if(key == KeyEvent.VK_E) {
+    		you.move(1, 1);
+    	} else if(key == KeyEvent.VK_A) {
+    		you.move(-1, 0);
+    	} else if(key == KeyEvent.VK_S) {
+    		you.move(0, 0);
+    	} else if(key == KeyEvent.VK_D) {
+    		you.move(1, 0);
+    	} else if(key == KeyEvent.VK_Z) {
+    		you.move(-1, -1);
+    	} else if(key == KeyEvent.VK_X) {
+    		you.move(0, -1);
+    	} else if(key == KeyEvent.VK_C) {
+    		you.move(1, -1);
+    	} else if(key == KeyEvent.VK_J) {
+    		you.jump();
+    	}
     }
 
-    public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode()== KeyEvent.VK_RIGHT)
-            draw.moveRight();
-        else if(e.getKeyCode()== KeyEvent.VK_LEFT)
-            draw.moveLeft();
-        else if(e.getKeyCode()== KeyEvent.VK_DOWN)
-            draw.moveDown();
-        else if(e.getKeyCode()== KeyEvent.VK_UP)
-            draw.moveUp();
-
-    }
-    public void keyTyped(KeyEvent e) {
-        System.out.println("keyTyped");
-    }
+    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
     
-    private void initUI() {       
-        
-        ImageIcon ii = loadImage();
+   
 
-        JLabel label = new JLabel(ii);
-
-        createLayout(label);
-
-        setTitle("Image");
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-    
-    private void createLayout(JComponent... arg) {
-
-        Container pane = getContentPane();
-        GroupLayout gl = new GroupLayout(pane);
-        pane.setLayout(gl);
-
-        gl.setAutoCreateContainerGaps(true);
-
-        gl.setHorizontalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0])
-        );
-
-        gl.setVerticalGroup(gl.createParallelGroup()
-                .addComponent(arg[0])
-        );
-
-        pack();
-    }
-
-    private ImageIcon loadImage() {
-
-        ImageIcon ii = new ImageIcon("src/game/fence.png");
-        return ii;
-    }
-
-    public MainFrame(){
-    	//initUI();
-        draw=new MainDraw();
+    public MainFrame() {
+        draw = new MainDraw();
+        you = new You();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
