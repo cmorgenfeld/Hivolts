@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 public class MainFrame extends JFrame implements KeyListener{
     private MainDraw draw;
+    private Rectangle fence;
 
     public void keyPressed(KeyEvent e) {
         System.out.println("keyPressed");
@@ -67,13 +68,13 @@ public class MainFrame extends JFrame implements KeyListener{
 
     private ImageIcon loadImage() {
 
-        ImageIcon ii = new ImageIcon("src/game/Electric Fence.png");
+        ImageIcon ii = new ImageIcon("src/game/fence.png");
         return ii;
     }
 
     public MainFrame(){
-    	initUI();
-        this.draw=new MainDraw();
+    	//initUI();
+        draw=new MainDraw();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -85,8 +86,8 @@ public class MainFrame extends JFrame implements KeyListener{
                 MainFrame frame = new MainFrame();
                 frame.setTitle("Hivolts Game");
                 frame.setResizable(false);
-                frame.setSize(600, 600);
-                frame.setMinimumSize(new Dimension(600, 600));
+                frame.setSize(600, 623);
+                frame.setMinimumSize(new Dimension(600, 623));
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.getContentPane().add(frame.draw);
                 frame.pack();

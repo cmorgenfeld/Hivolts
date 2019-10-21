@@ -1,29 +1,34 @@
+package game;
+
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.JComponent;
-import javax.swing.*;
+
+import java.awt.image.BufferedImage;
 import java.io.*;
-import java.awt.*;
-import java.awt.image.*;
+
+import javax.swing.JComponent;
+
 import javax.imageio.*;
 
 public class MainDraw extends JComponent {
 
     public int x = 50;
     public int y = 50;
-    public static BufferedImage image;
+    private static BufferedImage image;
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try {
-        	image = ImageIO.read(new File("src/fence.png"));
-        }
-        catch (IOException e) {
+        	image = ImageIO.read(new File("src/game/fence.png"));
+        } catch (IOException e) {
         	System.out.println("Exception caught");
         }
-        g.drawImage(image, 0, 0, 30, 30, Color.WHITE, null);
-        //g.fillRect(x, y, 50, 50);
-        //g.setColor(Color.BLACK);
+        for(int i=0; i<600; i+= 50) {
+        	g.drawImage(image, i, 0, 50, 50, Color.WHITE, null);
+        	g.drawImage(image, i, 550, 50, 50, Color.WHITE, null);
+        	g.drawImage(image, 0, i, 50, 50, Color.WHITE, null);
+        	g.drawImage(image, 550, i, 50, 50, Color.WHITE, null);
+        }
     }
 
     public void moveRight() {
