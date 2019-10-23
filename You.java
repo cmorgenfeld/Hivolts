@@ -6,6 +6,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JComponent;
+
 import javax.swing.*;
 import java.io.*;
 import java.awt.*;
@@ -29,9 +30,16 @@ public class You extends GamePiece{
 		g.drawImage(sprite, xcoord, ycoord, 50, 50, null);
 	}
 	
-	/*
-	 * 
-	public boolean move(int x, int y, boolean jump) {
+	public void move(int x, int y) {
+		super.setX(x);
+		super.setY(y);
+		isDead();
 	}
-	*/
+	
+	public void isDead() {
+		if(Grid.field[this.getX()][this.getY()] instanceof Fence || Grid.field[this.getX()][this.getY()] instanceof Mho) {
+			setDead(true);
+		}
+	}
 }
+
