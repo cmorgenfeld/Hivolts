@@ -22,11 +22,9 @@ public class Grid {
 					if (field[i][j] == null && Math.random() <= 0.12) {
 						field[i][j] = new Mho(i, j, mhoCount);
 						mhoCount++;
-		        }
-		      }
-		    }
-		  }
+					}
+				}
+			}
+		}
 	}
-	
-	  
 }
