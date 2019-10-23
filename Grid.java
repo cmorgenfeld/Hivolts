@@ -1,6 +1,6 @@
 
 public class Grid {
-  GamePiece[][] field = new GamePiece[12][12];
+  public GamePiece[][] field = new GamePiece[12][12];
   int fenceCount = 0;
   for (int i = 0; i < 12; i++) {
     for (int j = 0; j < 12; j++) {
