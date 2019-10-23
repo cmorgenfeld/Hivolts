@@ -1,8 +1,3 @@
-/**
- 
- * @author Connie Jiang
- */
-
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JComponent;
@@ -31,8 +26,7 @@ public class You extends GamePiece{
 	}
 	
 	public void move(int x, int y) {
-		super.setX(x);
-		super.setY(y);
+		super.move(x, y);
 		isDead();
 	}
 	
@@ -42,4 +36,5 @@ public class You extends GamePiece{
 		}
 	}
 }
+
 
