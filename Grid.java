@@ -16,13 +16,13 @@ public class Grid {
       }
     }
   }
-  int mohCount = 0;
+  int mhoCount = 0;
   while (mohCount < 12) {
     for (int i = 1; i < 11; i++) {
       for (int j = 1; j < 11; j++) {
         if (field[i][j] == null && Math.random() <= 0.12) {
-          field[i][j] == Moh(i, j, mohCount);
-          mohCount++;
+          field[i][j] == Mho(i, j, mohCount);
+          mhoCount++;
         }
       }
     }
