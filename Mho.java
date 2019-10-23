@@ -16,9 +16,11 @@ import javax.imageio.*;
 
 public class Mho extends GamePiece{
 	private static BufferedImage sprite;
+	private int number;
 	
-	public Mho(int x, int y) {
+	public Mho(int x, int y, int number) {
 		super(x, y);
+		this.number = number;
 	}
 	
 	public void drawYou(int xcoord, int ycoord, Graphics g) {
@@ -32,8 +34,7 @@ public class Mho extends GamePiece{
 	}
 	
 	public void move(int x, int y) {
-		super.setX(x);
-		super.setY(y);
+		super.move(x, y);
 		isDead();
 	}
 	
