@@ -1,3 +1,5 @@
+package game;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,6 +15,7 @@ public class MainFrame extends JFrame implements KeyListener{
     private MainDraw draw;
     private Rectangle fence;
     private You you;
+    private Grid grid;
 
     public void keyPressed(KeyEvent e) {
     	int key = e.getKeyCode();
@@ -25,7 +28,7 @@ public class MainFrame extends JFrame implements KeyListener{
     	} else if(key == KeyEvent.VK_A) {
     		you.move(-1, 0);
     	} else if(key == KeyEvent.VK_S) {
-    		you.move(0, 0);
+    		you.move(0, 0);;
     	} else if(key == KeyEvent.VK_D) {
     		you.move(1, 0);
     	} else if(key == KeyEvent.VK_Z) {
@@ -37,6 +40,7 @@ public class MainFrame extends JFrame implements KeyListener{
     	} else if(key == KeyEvent.VK_J) {
     		you.jump();
     	}
+    	repaint();
     }
 
     public void keyReleased(KeyEvent e) {}
@@ -45,8 +49,22 @@ public class MainFrame extends JFrame implements KeyListener{
    
 
     public MainFrame() {
+    	int youX = 0;
+    	int youY = 0;
+    	
         draw = new MainDraw();
-        you = new You();
+        grid = new Grid();
+        grid.init();
+        for(int i=0; i<11; i++) {
+        	for (int k=0; k<11; k++) {
+        		if(Grid.field[i][k] instanceof You) {
+	        		youX = i;
+	        		youY = k;
+	        	}
+        	}
+        }
+        you = new You(youX, youY);
+        draw.you = you;
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
