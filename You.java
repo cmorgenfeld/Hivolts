@@ -46,19 +46,21 @@ public class You extends GamePiece{
 	}
 	
 	public void jump() {
-		System.out.println("Dead");
 		int youCount = 0;
 		Grid.field[this.getX()][this.getY()] = null;
 		while (youCount < 1) {
 			for (int i = 1; i < 11; i++) {
 				for (int j = 1; j < 11; j++) {
 					if (!(Grid.field[i][j] instanceof Fence) && Math.random() <= 0.01 && youCount<1 && !(i==this.getX() && j == this.getY())) {
-						Grid.field[i][j] = new You(i, j);
-						this.setX(i);
-						this.setY(j);
-						youCount++;
-						break;
-
+						if(Grid.field[i][j] instanceof Mho) {
+							setDead(true);
+						} else {
+							Grid.field[i][j] = new You(i, j);
+							this.setX(i);
+							this.setY(j);
+							youCount++;
+							break;
+						}
 		        }
 		      }
 		    }
@@ -67,10 +69,8 @@ public class You extends GamePiece{
 	
 	public void isDead() {
 		if(Grid.field[this.getX()][this.getY()] instanceof Fence || Grid.field[this.getX()][this.getY()] instanceof Mho) {
-			System.out.println("Dead?");
 			setDead(true);
 		}
 	}
-}
 
 
