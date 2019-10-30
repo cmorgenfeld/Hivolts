@@ -1,3 +1,5 @@
+package game;
+
 public class Grid {
 	public static GamePiece[][] field = new GamePiece[12][12];
 	
@@ -16,15 +18,31 @@ public class Grid {
 			  }
 		}
 		int mhoCount = 0;
-		while (mhoCount < 12) {
+		while (mhoCount < 50) {
 			for (int i = 1; i < 11; i++) {
 				for (int j = 1; j < 11; j++) {
-					if (field[i][j] == null && Math.random() <= 0.12) {
+					if (field[i][j] == null && Math.random() <= 0.12 && mhoCount<50) {
 						field[i][j] = new Mho(i, j, mhoCount);
 						mhoCount++;
-					}
-				}
-			}
-		}
+
+		        }
+		      }
+		    }
+		  }
+		int youCount = 0;
+		while (youCount < 1) {
+			for (int i = 1; i < 11; i++) {
+				for (int j = 1; j < 11; j++) {
+					if (field[i][j] == null && Math.random() <= 0.01 && youCount<1) {
+						field[i][j] = new You(i, j);
+						youCount++;
+						break;
+
+		        }
+		      }
+		    }
+		  }
 	}
+	
+	  
 }
