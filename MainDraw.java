@@ -15,7 +15,7 @@ public class MainDraw extends JComponent {
     public int x = 50;
     public int y = 50;
     private static BufferedImage fence;
-    private static BufferedImage mho;
+    public You you;
     
     final private Color background =  new Color(238, 238, 238, 255);
 
@@ -23,7 +23,6 @@ public class MainDraw extends JComponent {
         super.paintComponent(g);
         try {
         	fence = ImageIO.read(new File("src/game/fence.png"));
-        	mho = ImageIO.read(new File("src/game/Mho.png"));
         } catch (IOException e) {
         	System.out.println("Exception caught");
         }
@@ -33,7 +32,17 @@ public class MainDraw extends JComponent {
         	g.drawImage(fence, 0, i, 50, 50, background, null);
         	g.drawImage(fence, 550, i, 50, 50, background, null);
         }
-        g.drawImage(mho, 100, 100, 50, 50, background, null);
+
+		for(int i=0; i<12; i++) {
+			for(int k=0; k<12; k++) {
+				if(Grid.field[i][k] instanceof Mho) {
+	        		Mho.drawMho(i*50, k*50, g);
+	        	} else if(Grid.field[i][k] instanceof Fence) {
+	        		Fence.drawFence(i*50, k*50, g);
+	        	}
+			} 	
+        }
+        you.drawYou(g);
         drawGrid(g);
     }
 
