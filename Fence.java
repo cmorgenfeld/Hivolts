@@ -1,6 +1,4 @@
-/**
- * @author Connie Jiang
- */
+package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,9 +17,9 @@ public class Fence extends GamePiece{
 		super(x, y);
 	}
 	
-	public void drawFence(int xcoord, int ycoord, Graphics g) {
+	public static void drawFence(int xcoord, int ycoord, Graphics g) {
 		try {
-	    	sprite = ImageIO.read(new File("src/fence.png"));
+	    	sprite = ImageIO.read(new File("src/game/fence.png"));
 	    }
 	    catch (IOException e) {
 	    	System.out.println("Exception caught");
