@@ -18,10 +18,10 @@ public class Grid {
 			  }
 		}
 		int mhoCount = 0;
-		while (mhoCount < 50) {
+		while (mhoCount < 12) {
 			for (int i = 1; i < 11; i++) {
 				for (int j = 1; j < 11; j++) {
-					if (field[i][j] == null && Math.random() <= 0.12 && mhoCount<50) {
+					if (field[i][j] == null && Math.random() <= 0.12 && mhoCount<12) {
 						field[i][j] = new Mho(i, j, mhoCount);
 						mhoCount++;
 
