@@ -1,8 +1,4 @@
-/**
- * 
- * @author Connie Jiang
- *
- */
+package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,19 +19,59 @@ public class Mho extends GamePiece{
 		this.number = number;
 	}
 	
-	public void drawYou(int xcoord, int ycoord, Graphics g) {
+	public static void drawMho(int xcoord, int ycoord, Graphics g) {
 		try {
-	    	sprite = ImageIO.read(new File("src/Mho.png"));
+	    	sprite = ImageIO.read(new File("src/game/Mho.png"));
 	    }
 	    catch (IOException e) {
 	    	System.out.println("Exception caught");
 	    }
+		for(int i=0; i<11; i++) {
+			for(int j=0; j<11; j++) {
+				if(Grid.field[i][j] instanceof Mho) {
+					Grid.field[i][j].move(i, j);
+				}
+			}
+		}
 		g.drawImage(sprite, xcoord, ycoord, 50, 50, null);
+		
 	}
 	
 	public void move(int x, int y) {
-		super.move(x, y);
+		System.out.println("move");
+		int[] youXY = wheresYou();
+		int diffX = Math.abs(x - youXY[0]);
+		int diffY = Math.abs(y - youXY[1]);
+		if(diffX > diffY) {
+			if(youXY[0] > x) {
+				super.setX(x + 1);
+			} else {
+				super.setX(x - 1);
+			}
+		} else if (diffY > diffX) {
+			if(youXY[1] > y) {
+				super.setY(y + 1);
+			} else {
+				super.setY(y - 1);
+			}
+		} else {
+			//Diagonal
+		}
 		isDead();
+	}
+	
+	public int[] wheresYou() {
+		int[] retval = new int[2];
+		for(int i=0; i<11; i++) {
+			for(int j=0; j<11; j++) {
+				if(Grid.field[i][j] instanceof You) {
+					retval[0] = i;
+					retval[1] =j;
+					break;
+				}
+			}
+		}
+		return retval;
 	}
 	
 	public void isDead() {
