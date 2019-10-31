@@ -27,3 +27,4 @@ public class Fence extends GamePiece{
 		g.drawImage(sprite, xcoord, ycoord, 50, 50, null);
 	}
 }
+
