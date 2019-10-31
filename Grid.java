@@ -17,12 +17,11 @@ public class Grid {
 			      }
 			  }
 		}
-		//The above generates Fences on the perimiter and inside the Grid
 		int mhoCount = 0;
-		while (mhoCount < 12) {
+		while (mhoCount < 1) {
 			for (int i = 1; i < 11; i++) {
 				for (int j = 1; j < 11; j++) {
-					if (field[i][j] == null && Math.random() <= 0.12 && mhoCount<12) {
+					if (field[i][j] == null && Math.random() <= 0.12 && mhoCount<1) {
 						field[i][j] = new Mho(i, j, mhoCount);
 						mhoCount++;
 
@@ -30,7 +29,6 @@ public class Grid {
 		      }
 		    }
 		  }
-		//The above generates MHO's inside the Grid
 		int youCount = 0;
 		while (youCount < 1) {
 			for (int i = 1; i < 11; i++) {
@@ -44,7 +42,6 @@ public class Grid {
 		      }
 		    }
 		  }
-		//This generates YOU
 	}
 	
 	  
