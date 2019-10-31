@@ -1,8 +1,5 @@
-/**
- * 
- * @author Connie Jiang
- *
- */
+package game;
+
 public class GamePiece {
 	private int x;
 	private int y;
@@ -42,7 +39,7 @@ public class GamePiece {
 	}
 	
 	public void move(int X, int Y) {
-		x = X;
-		y = Y;
+		x += X;
+		y -= Y;
 	}
 }
