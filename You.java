@@ -34,10 +34,10 @@ public class You extends GamePiece{
 	}
 	
 	public void move(int x, int y) {
+		Grid.field[this.getX()][this.getY()] = null;
 		super.move(x, y);
-		System.out.println("moved");
 		isDead();
-		System.out.println(getDead());
+		Grid.field[this.getX()][this.getY()] = new You(this.getX(), this.getY());
 	}
 	
 	private boolean notafenceandlowprop(int i, int j) {
@@ -87,4 +87,3 @@ public class You extends GamePiece{
 			setDead(true);
 		}
 	}
-}
