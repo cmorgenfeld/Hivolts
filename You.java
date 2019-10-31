@@ -12,7 +12,6 @@ import javax.imageio.*;
 
 public class You extends GamePiece{
 	private static BufferedImage sprite;
-	private boolean gameLost = false;
 	
 	public You(int x, int y) {
 		super(x, y);
@@ -26,7 +25,7 @@ public class You extends GamePiece{
 	    	System.out.println("Exception caught");
 	    }
 		g.drawImage(sprite, this.getX()*50, this.getY()*50, 50, 50, null);
-		if(gameLost) {
+		if(getDead()) {
 			g.setColor(Color.RED);
 			g.fillRect(0, 0, 600, 600);
 			g.setColor(Color.BLACK);
@@ -39,26 +38,30 @@ public class You extends GamePiece{
 		System.out.println("moved");
 		isDead();
 		System.out.println(getDead());
-		if(getDead()) {
-			gameLost = true;
-			System.out.println("Dead");
-		}
+	}
+	
+	private boolean notafenceandlowprop(int i, int j) {
+		return !(isFence(i, j)) && Math.random() <= 0.01;
 	}
 	
 	public void jump() {
-		int youCount = 0;
+		boolean done = false;
 		Grid.field[this.getX()][this.getY()] = null;
-		while (youCount < 1) {
+		while (!done) {
 			for (int i = 1; i < 11; i++) {
 				for (int j = 1; j < 11; j++) {
-					if (!(Grid.field[i][j] instanceof Fence) && Math.random() <= 0.01 && youCount<1 && !(i==this.getX() && j == this.getY())) {
-						if(Grid.field[i][j] instanceof Mho) {
-							setDead(true);
+					boolean p = notafenceandlowprop(i,j);
+					if (p && !done && !(oldCoords(i, j))) {
+						// do we always reach this point as expected?
+						System.out.println(i + ", " + j);
+						if(isMho(i, j)) {
+							this.setDead(true);
+							done = true;
 						} else {
 							Grid.field[i][j] = new You(i, j);
 							this.setX(i);
 							this.setY(j);
-							youCount++;
+							done = true;
 							break;
 						}
 		        }
@@ -67,10 +70,21 @@ public class You extends GamePiece{
 		  }
 	}
 	
+	public boolean isFence(int x, int y) {
+		return(Grid.field[x][y] instanceof Fence);
+	}
+	
+	public boolean isMho(int x, int y) {
+		return(Grid.field[x][y] instanceof Mho);
+	}
+	
+	public boolean oldCoords(int x, int y) {
+		return x == this.getX() && y == this.getY();
+	}
+	
 	public void isDead() {
 		if(Grid.field[this.getX()][this.getY()] instanceof Fence || Grid.field[this.getX()][this.getY()] instanceof Mho) {
 			setDead(true);
 		}
 	}
-
-
+}
