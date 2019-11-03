@@ -1,4 +1,3 @@
-package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,27 +9,28 @@ import javax.swing.JComponent;
 
 import javax.imageio.*;
 
-public class MainDraw extends JComponent {
+/**
+ * this is the class where the grid is drawn 
+ * @author Given by Mr. Kuszmaul
+ *         edited by Creighton
+ *         edited by Connie
+ *         documentation by Jeffrey
+ *
+ */
 
-    public int x = 50;
-    public int y = 50;
-    private static BufferedImage fence;
+public class MainDraw extends JComponent {
     public You you;
     
-    final private Color background =  new Color(238, 238, 238, 255);
-
+    /**
+     * paints the game
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        try {
-        	fence = ImageIO.read(new File("src/game/fence.png"));
-        } catch (IOException e) {
-        	System.out.println("Exception caught");
-        }
         for(int i=0; i<600; i+= 50) {
-        	g.drawImage(fence, i, 0, 50, 50, background, null);
-        	g.drawImage(fence, i, 550, 50, 50, background, null);
-        	g.drawImage(fence, 0, i, 50, 50, background, null);
-        	g.drawImage(fence, 550, i, 50, 50, background, null);
+        	Fence.drawFence(i, 0, g);
+        	Fence.drawFence(i,  550,  g);
+        	Fence.drawFence(0, i, g);
+        	Fence.drawFence(550, i, g);
         }
 
 		for(int i=0; i<12; i++) {
