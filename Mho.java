@@ -1,4 +1,3 @@
-package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,18 +9,38 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
+/**
+ * class for Mho, includes the mho's movements which corresponds with the location of You
+ * @author mostly Creighton (did all the fancy move methods)
+ *         with a tiny bit of Connie (did the drawMho method and the constructor)
+ *         debugged by Sergey (with the help of Mr. Kuszmaul's presence)
+ *         documentation by Jeffrey
+ *
+ */
 public class Mho extends GamePiece{
 	private static BufferedImage sprite;
 	private int number;
 	
+	/**
+	 * constructor for Mho
+	 * @param x initial x coordinate
+	 * @param y initial y coordinate
+	 * @param number which Mho it is
+	 */
 	public Mho(int x, int y, int number) {
 		super(x, y);
 		this.number = number;
 	}
 	
+	/**
+	 * draws Mho
+	 * @param xcoord x location of Mho on the display
+	 * @param ycoord y location of Mho on the display
+	 * @param g graphics variable
+	 */
 	public static void drawMho(int xcoord, int ycoord, Graphics g) {
 		try {
-	    	sprite = ImageIO.read(new File("src/game/Mho.png"));
+	    	sprite = ImageIO.read(new File("src/Mho.png"));
 	    }
 	    catch (IOException e) {
 	    	System.out.println("Exception caught");
@@ -30,6 +49,9 @@ public class Mho extends GamePiece{
 		
 	}
 	
+	/**
+	 * moves the Mho according to the location of You on the field
+	 */
 	public void move(int x, int y) {
 		Grid.field[x][y] = null;
 		int[] youXY = wheresYou();
@@ -62,6 +84,10 @@ public class Mho extends GamePiece{
 		isDead();
 	}
 	
+	/**
+	 * finds You in the field
+	 * @return the location of You
+	 */
 	public int[] wheresYou() {
 		int[] retval = new int[2];
 		for(int i=0; i<11; i++) {
@@ -76,14 +102,20 @@ public class Mho extends GamePiece{
 		return retval;
 	}
 	
+	/**
+	 * if the mho is dead, this method sets the dead value to true
+	 */
 	public void isDead() {
 		if(Grid.field[this.getX()][this.getY()] instanceof Fence) {
 			setDead(true);
 		}
 	}
 	
+	/**
+	 * getter for the number of the Mho
+	 * @return number
+	 */
 	public int getNumber() {
 		  return this.number;
 	}
 }
-
