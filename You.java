@@ -1,4 +1,3 @@
-package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,16 +9,31 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
+/**
+ * You: can draw itself, can move and jump
+ * @author Creighton, Connie, Sergey, and Jeffrey
+ * 			documentation by Jeffrey
+ *
+ */
 public class You extends GamePiece{
 	private static BufferedImage sprite;
 	
+	/**
+	 * constructor for You
+	 * @param x initial x coordinate
+	 * @param y initial y coordinate
+	 */
 	public You(int x, int y) {
 		super(x, y);
 	}
 	
+	/**
+	 * draws itself, if it is dead, displays the Lost screen
+	 * @param g Graphics variable
+	 */
 	public void drawYou(Graphics g) {
 		try {
-	    	sprite = ImageIO.read(new File("src/game/You.png"));
+	    	sprite = ImageIO.read(new File("src/You.png"));
 	    }
 	    catch (IOException e) {
 	    	System.out.println("Exception caught");
@@ -33,6 +47,9 @@ public class You extends GamePiece{
 		}
 	}
 	
+	/**
+	 * @override
+	 */
 	public void move(int x, int y) {
 		Grid.field[this.getX()][this.getY()] = null;
 		super.move(x, y);
@@ -40,10 +57,20 @@ public class You extends GamePiece{
 		Grid.field[this.getX()][this.getY()] = new You(this.getX(), this.getY());
 	}
 	
+	/**
+	 * helper method
+	 * @param i x coordinate
+	 * @param j y coordinate
+	 * @return true or false
+	 */
 	private boolean notafenceandlowprop(int i, int j) {
 		return !(isFence(i, j)) && Math.random() <= 0.01;
 	}
 	
+	/**
+	 * jump method: you move to a random location on the grid, with the guarantee that you will
+	 * not land on an electric fence
+	 */
 	public void jump() {
 		boolean done = false;
 		Grid.field[this.getX()][this.getY()] = null;
@@ -70,20 +97,42 @@ public class You extends GamePiece{
 		  }
 	}
 	
+	/**
+	 * checks if the location on the field is a fence
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @return true if it is a fence, false otherwise
+	 */
 	public boolean isFence(int x, int y) {
 		return(Grid.field[x][y] instanceof Fence);
 	}
 	
+	/**
+	 * checks if the location on the field is a Mho
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @return true if it is a Mho, false otherwise
+	 */
 	public boolean isMho(int x, int y) {
 		return(Grid.field[x][y] instanceof Mho);
 	}
 	
+	/**
+	 * checks if the new coordinates are the same as the original
+	 * @param x new x coordinate
+	 * @param y new y coordinate
+	 * @return true if the coordinates are the same, false otherwise
+	 */
 	public boolean oldCoords(int x, int y) {
 		return x == this.getX() && y == this.getY();
 	}
 	
+	/**
+	 * sets dead to true if You are dead, false otherwise
+	 */
 	public void isDead() {
 		if(Grid.field[this.getX()][this.getY()] instanceof Fence || Grid.field[this.getX()][this.getY()] instanceof Mho) {
 			setDead(true);
 		}
 	}
+}
