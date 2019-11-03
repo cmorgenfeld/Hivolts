@@ -1,8 +1,15 @@
-package game;
-
+/**
+ * the Grid class generates the initial grid and has the instance variable field which is the gameboard
+ * @author Sergey and Creighton
+ * 			documentation by Jeffrey
+ *
+ */
 public class Grid {
 	public static GamePiece[][] field = new GamePiece[12][12];
 	
+	/**
+	 * initializes the Game Board
+	 */
 	public void init() {
 		int fenceCount = 0;
 		for (int i = 0; i < 12; i++) {
