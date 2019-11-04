@@ -63,6 +63,23 @@ public class You extends GamePiece{
 		g.drawString("You Lost!", 250, 300);
 	}
 	
+	public static void winScreen(Graphics g) {
+		boolean win = true;
+		for(int i=0; i<11; i++) {
+			for(int j=0; j<11; j++) {
+				if(Grid.field[i][j] instanceof Mho) {
+					win = false;
+				}
+			}
+		}
+		if(win) {
+			g.setColor(Color.GREEN);
+			g.fillRect(0, 0, 600, 620);
+			g.setColor(Color.BLACK);
+			g.drawString("You Won!", 250, 300);
+		}
+	}
+	
 	/**
 	 * helper method
 	 * @param i x coordinate
