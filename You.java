@@ -63,7 +63,7 @@ public class You extends GamePiece{
 	 * @param j y coordinate
 	 * @return true or false
 	 */
-	private boolean notafenceandlowprop(int i, int j) {
+	private boolean notafenceandlowprob(int i, int j) {
 		return !(isFence(i, j)) && Math.random() <= 0.01;
 	}
 	
@@ -77,7 +77,7 @@ public class You extends GamePiece{
 		while (!done) {
 			for (int i = 1; i < 11; i++) {
 				for (int j = 1; j < 11; j++) {
-					boolean p = notafenceandlowprop(i,j);
+					boolean notFenceandLowProb = notafenceandlowprob(i,j);
 					if (p && !done && !(oldCoords(i, j))) {
 						// do we always reach this point as expected?
 						System.out.println(i + ", " + j);
