@@ -53,6 +53,7 @@ public class Mho extends GamePiece{
 	 * moves the Mho according to the location of You on the field
 	 */
 	public void move(int x, int y) {
+		System.out.println(x + ", " + y);
 		Grid.field[x][y] = null;
 		int[] youXY = wheresYou();
 		int diffX = Math.abs(x - youXY[0]);
@@ -80,8 +81,13 @@ public class Mho extends GamePiece{
 				this.setY(y - 1);
 			}
 		}
-		Grid.field[this.getX()][this.getY()] = new Mho(this.getX(), this.getY(), this.number);
-		isDead();
+		if(Grid.field[this.getX()][this.getY()] instanceof Fence) {	
+		} else if(Grid.field[this.getX()][this.getY()] instanceof You) {
+			youDead = true;
+			Grid.field[this.getX()][this.getY()].setDead(true);
+		} else {
+			Grid.field[this.getX()][this.getY()] = new Mho(this.getX(), this.getY(), this.number);
+		}
 	}
 	
 	/**
