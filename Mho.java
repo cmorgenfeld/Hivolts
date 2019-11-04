@@ -20,6 +20,7 @@ import javax.imageio.*;
 public class Mho extends GamePiece{
 	private static BufferedImage sprite;
 	private int number;
+	private static boolean youDead = false;
 	
 	/**
 	 * constructor for Mho
@@ -40,12 +41,16 @@ public class Mho extends GamePiece{
 	 */
 	public static void drawMho(int xcoord, int ycoord, Graphics g) {
 		try {
-	    	sprite = ImageIO.read(new File("src/Mho.png"));
+	    	sprite = ImageIO.read(new File("src/game/Mho.png"));
 	    }
 	    catch (IOException e) {
 	    	System.out.println("Exception caught");
 	    }
 		g.drawImage(sprite, xcoord, ycoord, 50, 50, null);
+		System.out.println(youDead);
+		if(youDead) {
+			You.deadScreen(g);
+		}
 		
 	}
 	
