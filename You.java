@@ -33,17 +33,14 @@ public class You extends GamePiece{
 	 */
 	public void drawYou(Graphics g) {
 		try {
-	    	sprite = ImageIO.read(new File("src/You.png"));
+	    	sprite = ImageIO.read(new File("src/game/You.png"));
 	    }
 	    catch (IOException e) {
 	    	System.out.println("Exception caught");
 	    }
 		g.drawImage(sprite, this.getX()*50, this.getY()*50, 50, 50, null);
 		if(getDead()) {
-			g.setColor(Color.RED);
-			g.fillRect(0, 0, 600, 600);
-			g.setColor(Color.BLACK);
-			g.drawString("You Lost!", 250, 300);
+			deadScreen(g);
 		}
 	}
 	
@@ -51,10 +48,19 @@ public class You extends GamePiece{
 	 * @override
 	 */
 	public void move(int x, int y) {
-		Grid.field[this.getX()][this.getY()] = null;
-		super.move(x, y);
-		isDead();
-		Grid.field[this.getX()][this.getY()] = new You(this.getX(), this.getY());
+		if(!getDead()) {
+			Grid.field[this.getX()][this.getY()] = null;
+			super.move(x, y);
+			isDead();
+			Grid.field[this.getX()][this.getY()] = new You(this.getX(), this.getY());
+		}	
+	}
+	
+	public static void deadScreen(Graphics g) {
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, 600, 620);
+		g.setColor(Color.BLACK);
+		g.drawString("You Lost!", 250, 300);
 	}
 	
 	/**
@@ -78,7 +84,7 @@ public class You extends GamePiece{
 			for (int i = 1; i < 11; i++) {
 				for (int j = 1; j < 11; j++) {
 					boolean notFenceandLowProb = notafenceandlowprob(i,j);
-					if (p && !done && !(oldCoords(i, j))) {
+					if (notFenceandLowProb && !done && !(oldCoords(i, j))) {
 						// do we always reach this point as expected?
 						System.out.println(i + ", " + j);
 						if(isMho(i, j)) {
